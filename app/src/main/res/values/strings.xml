@@ -175,4 +175,6 @@
     <string name="title_activity_notifications">Notifications</string>
     <string name="ty_msg">Thank you for ordering! Your order is being processed.</string>
     <string name="back_home">Return to Homepage</string>
+    <string name="place_order">Place Order</string>
+    <string name="header">Order Summary</string>
 </resources>

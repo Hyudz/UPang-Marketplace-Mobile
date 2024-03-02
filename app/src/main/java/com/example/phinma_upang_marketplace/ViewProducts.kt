@@ -20,35 +20,28 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ViewProducts : AppCompatActivity() {
-    private lateinit var product_name: TextView
-    private lateinit var product_price: TextView
-    private lateinit var product_description: TextView
-    private lateinit var product_image: ImageView
-    private lateinit var product_id: String
-    private lateinit var buyBtn : Button
-    private lateinit var likeBtn : Button
     private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_products)
 
-        buyBtn = findViewById(R.id.buyBtn)
-        product_name = findViewById(R.id.textProductName)
-        product_price = findViewById(R.id.textProductPrice)
-        product_description = findViewById(R.id.productDescription)
+        val buyBtn : Button = findViewById(R.id.buyBtn)
+        val product_name : TextView = findViewById(R.id.textProductName)
+        val product_price : TextView = findViewById(R.id.textProductPrice)
+        val product_description : TextView = findViewById(R.id.productDescription)
         val product_image = findViewById<ImageView>(R.id.productImage)
         val productPath = intent.getStringExtra("image")
 
         Glide.with(this).load(productPath).into(product_image)
 
         val authToken = intent.getStringExtra("authToken")
-        Log.d("ViewProducts", "Auth Token: $authToken")
 
         product_name.text = intent.getStringExtra("product_name")
         product_price.text = intent.getStringExtra("product_price")
         product_description.text = intent.getStringExtra("product_description")
-        product_id = intent.getStringExtra("productId").toString()
+        val product_id = intent.getStringExtra("productId").toString()
         val seller_id = intent.getStringExtra("sellerId")
+        val buyerName = intent.getStringExtra("fname") + " " + intent.getStringExtra("lname")
 
         buyBtn.setOnClickListener{
             val intent = Intent(this, ConfirmOrder::class.java)
@@ -58,14 +51,23 @@ class ViewProducts : AppCompatActivity() {
             intent.putExtra("product_price", product_price.text.toString())
             intent.putExtra("seller_id", seller_id)
             intent.putExtra("product_image", productPath)
-
+            intent.putExtra("buyerName", buyerName)
             startActivity(intent)
         }
 
-        likeBtn = findViewById(R.id.likeBtn)
-        likeBtn.setOnClickListener{
-            addLike(product_id, authToken!!)
-        }
+    }
+
+    fun findSeller(){
+        val sellerId = intent.getStringExtra("sellerId")
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(ItemsInterface::class.java)
+
+
     }
 
     fun addLike(productId: String, authToken: String){

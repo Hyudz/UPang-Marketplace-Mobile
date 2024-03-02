@@ -24,6 +24,36 @@ class ProfileActivity : AppCompatActivity() {
         logoutBtn.setOnClickListener {
             logout()
         }
+
+        val editProfile : Button = findViewById(R.id.editProfileButton)
+        editProfile.setOnClickListener {
+            editProfile()
+        }
+
+        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
+        dashboardBtn.setOnClickListener {
+            sellerDashboard()
+        }
+
+        val purchaseHistoryBtn : Button = findViewById(R.id.purchaseHistoryButton)
+        purchaseHistoryBtn.setOnClickListener {
+            purchaseHistory()
+        }
+    }
+
+    fun editProfile() {
+        val intent = Intent(this, ProfileSettingActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun sellerDashboard() {
+        val intent = Intent(this, Dashboard::class.java)
+        startActivity(intent)
+    }
+
+    fun purchaseHistory() {
+        val intent = Intent(this, PurchaseHistory::class.java)
+        startActivity(intent)
     }
 
     fun logout() {

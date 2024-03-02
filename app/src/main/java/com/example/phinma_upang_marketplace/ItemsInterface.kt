@@ -31,4 +31,7 @@ interface ItemsInterface {
 
     @POST("products") //for sellers to post a product
     fun postProduct(@Body productRequest: PostProduct, @Header("Authorization") token: String): Call<Void> //TODO: Change the return type to the response of the post request
+
+    @GET("/users") //hindi ko pa alam yung endpoint
+    fun getSeller(): Call<Void>
 }

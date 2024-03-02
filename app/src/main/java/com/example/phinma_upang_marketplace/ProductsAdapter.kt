@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ProductsAdapter(private val context: Context, private val products: List<ProductsFetch>, private val authToken: String) :
+class ProductsAdapter(private val context: Context, private val products: List<ProductsFetch>, private val authToken: String, private val fname : String, private val lname : String) :
     RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,6 +36,8 @@ class ProductsAdapter(private val context: Context, private val products: List<P
             val productId = product.id
             val intent = Intent(context, ViewProducts::class.java)
             intent.putExtra("authToken", authToken)
+            intent.putExtra("fname", fname)
+            intent.putExtra("lname", lname)
             intent.putExtra("product_name", product.name)
             intent.putExtra("product_price", product.price)
             intent.putExtra("product_description", product.description)

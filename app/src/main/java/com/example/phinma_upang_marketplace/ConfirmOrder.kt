@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ConfirmOrder : AppCompatActivity() {
 
     private lateinit var confirmBtn : Button
+    private lateinit var buyerName : TextView
     val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,17 @@ class ConfirmOrder : AppCompatActivity() {
         val productID = intent.getStringExtra("product_id").toString()
         val sellerId = intent.getStringExtra("seller_id").toString()
         val authToken = intent.getStringExtra("authToken").toString()
+        buyerName = findViewById(R.id.buyerName)
+        val textView = findViewById<TextView>(R.id.textView2)
+
+        //TODO: ADD TO CART KINEMEKEME
+        //TODO: MESSAGING SYSTEM
+
+        buyerName.text = intent.getStringExtra("buyerName").toString()
+        textView.text = "$productName \n$productPrice"
+        //TODO: Add product quantity?
+        //TODO: Add Seller details
+        //TODO: Add payment method (last na yun)
 
         confirmBtn = findViewById(R.id.placeBtn)
         confirmBtn.setOnClickListener{
@@ -75,10 +88,7 @@ class ConfirmOrder : AppCompatActivity() {
             }
         })
 
-<<<<<<< HEAD
-=======
         //start the intent
->>>>>>> 073ae06f231b9ca69f8d45b82f762768289d4f06
         val intent = Intent(this, OrderConfirmed::class.java)
         intent.putExtra("product_name", productName)
         intent.putExtra("product_price", productPrice)

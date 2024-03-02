@@ -27,9 +27,11 @@ class ProductItem : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_item)
         val authToken = intent.getStringExtra("authToken")
+        val fname = intent.getStringExtra("fname")
+        val lname = intent.getStringExtra("lname")
         recyclerView = findViewById<View>(R.id.productList) as RecyclerView
         recyclerView!!.layoutManager = GridLayoutManager(this, 2)
-        adapter = ProductsAdapter(this, products, authToken!!)
+        adapter = ProductsAdapter(this, products, authToken!!, fname!!, lname!!)
         recyclerView!!.adapter = adapter
 
         val retrofit = Retrofit.Builder()

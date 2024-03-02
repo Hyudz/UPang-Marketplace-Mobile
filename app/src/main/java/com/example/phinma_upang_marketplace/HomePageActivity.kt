@@ -19,43 +19,56 @@ class HomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
         shop = findViewById(R.id.startshopping)
-        shop.setOnClickListener {
-            shop()
-        }
-
-        Log.d("HomePageActivity", "User Type: ${intent.getStringExtra("authToken")}")
-
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavigationview)
         bottomNavigationView.selectedItemId = R.id.home
 
         val cartButton :ImageButton = findViewById(R.id.shopping_cart)
         val messagesButton : ImageButton = findViewById(R.id.chat)
+        val fname : String = intent.getStringExtra("fname").toString()
+        val lname : String = intent.getStringExtra("lname").toString()
+
+
+        val authToken = intent.getStringExtra("authToken")
+        shop.setOnClickListener {
+            val intent = Intent(this, ProductItem::class.java)
+            intent.putExtra("authToken", authToken)
+            intent.putExtra("fname", fname)
+            intent.putExtra("lname", lname)
+            startActivity(intent)
+        }
 
         cartButton.setOnClickListener {
-            cart()
+            val intent = Intent(this, CartActivity::class.java)
+            intent.putExtra("authToken", authToken)
+            startActivity(intent)
         }
 
         messagesButton.setOnClickListener {
-            messages()
+            val intent = Intent(this, Messages::class.java)
+            intent.putExtra("authToken", authToken)
+            startActivity(intent)
         }
 
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.home -> startActivity(Intent(this, HomePageActivity::class.java))
+                R.id.home -> {
+                    val intent = Intent(this, HomePageActivity::class.java)
+                    intent.putExtra("authToken", authToken)
+                    intent.putExtra("fname", fname)
+                    intent.putExtra("lname", lname)
+                    startActivity(intent)
+                }
                 R.id.favorite -> {
-                    val authToken = intent.getStringExtra("authToken")
                     val intent = Intent(this, Likes::class.java)
                     intent.putExtra("authToken", authToken)
                     startActivity(intent)
                 }
                 R.id.notification -> {
-                    val authToken = intent.getStringExtra("authToken")
                     val intent = Intent(this, Notifications::class.java)
                     intent.putExtra("authToken", authToken)
                     startActivity(intent)
                 }
                 R.id.profile -> {
-                    val authToken = intent.getStringExtra("authToken")
                     val intent = Intent(this, ProfileActivity::class.java)
                     intent.putExtra("authToken", authToken)
                     startActivity(intent)
@@ -65,30 +78,9 @@ class HomePageActivity : AppCompatActivity() {
         }
     }
 
-    private fun shop(){
-        val authToken = intent.getStringExtra("authToken")
-        val intent = Intent(this, ProductItem::class.java)
-        intent.putExtra("authToken", authToken)
-        startActivity(intent)
-    }
-
     //dinagdag ko lang to para hindi mag back sa log in page
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         moveTaskToBack(false)
-    }
-
-    public fun cart(){
-        val authToken = intent.getStringExtra("authToken")
-        val intent = Intent(this, CartActivity::class.java)
-        intent.putExtra("authToken", authToken)
-        startActivity(intent)
-    }
-
-    public fun messages(){
-        val authToken = intent.getStringExtra("authToken")
-        val intent = Intent(this, Messages::class.java)
-        intent.putExtra("authToken", authToken)
-        startActivity(intent)
     }
 }

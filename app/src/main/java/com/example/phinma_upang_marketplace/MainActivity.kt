@@ -57,11 +57,12 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-
+                        Log.d("Login", response.body().toString())
                         val authToken = "Bearer ${response.body()?.token}"
                         val userType = response.body()?.user?.user_type.toString()
-                        Toast.makeText(applicationContext, "Login Successful", Toast.LENGTH_SHORT).show()
-                        loginNav(authToken, userType)
+                        val fname = response.body()?.user?.first_name.toString()
+                        val lname = response.body()?.user?.last_name.toString()
+                        loginNav(authToken, userType, fname, lname)
                     } else {
                         Toast.makeText(applicationContext, "Null response", Toast.LENGTH_SHORT).show()
                     }
@@ -77,10 +78,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun loginNav(authToken: String, userType: String) {
+    private fun loginNav(authToken: String, userType: String, fname: String, lname: String) {
         val intent = Intent(this, HomePageActivity::class.java)
         intent.putExtra("authToken", authToken)
         intent.putExtra("userType", userType)
+        intent.putExtra("fname", fname)
+        intent.putExtra("lname", lname)
         startActivity(intent)
     }
 
