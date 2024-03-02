@@ -177,4 +177,7 @@
     <string name="back_home">Return to Homepage</string>
     <string name="place_order">Place Order</string>
     <string name="header">Order Summary</string>
+    <string name="i_am_looking_for">I am looking for...</string>
+    <string name="item_categories">Item Categories:</string>
+    <string name="home">Home</string>
 </resources>

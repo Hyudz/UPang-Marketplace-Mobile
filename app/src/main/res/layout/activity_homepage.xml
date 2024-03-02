@@ -10,7 +10,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/marterialcard"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="120dp"
         app:cardCornerRadius="8dp"
@@ -34,47 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8.6dp"
             android:layout_marginStart="45dp"
-            android:text="Search here ..."
-            android:textSize="22dp"
+            android:text="@string/i_am_looking_for"
+            android:textSize="22sp"
             app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"/>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="270dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="12dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/shopping_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2.5dp"
-            android:layout_marginBottom="2.5dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_cart"
-            android:backgroundTint="@android:color/transparent" />
-
-        <ImageButton
-            android:id="@+id/chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2.5dp"
-            android:layout_marginBottom="2.5dp"
-            android:layout_marginStart="55dp"
-            android:src="@drawable/ic_chat"
-            android:backgroundTint="@android:color/transparent"
-            />
-
     </com.google.android.material.card.MaterialCardView>
 
     <TextView

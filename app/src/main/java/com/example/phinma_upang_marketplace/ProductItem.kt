@@ -22,7 +22,6 @@ class ProductItem : AppCompatActivity() {
     private var recyclerView: RecyclerView? = null
     private var adapter: ProductsAdapter? = null
     private var products = mutableListOf<ProductsFetch>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_item)

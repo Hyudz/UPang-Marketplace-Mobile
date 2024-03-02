@@ -30,35 +30,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textview.MaterialTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Item Name"
+                    android:id="@+id/item_name"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Item Name"
-                    android:layout_marginTop="5dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+
+
+
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Quantity"
-                    android:drawableRight="@drawable/ic_down_arrow"
+                    android:id="@+id/item_quantity"
                     android:drawableTint="@color/black"
                     android:paddingHorizontal="5dp"
                     android:layout_marginTop="5dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
+
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Price Item"
+                    android:id="@+id/item_price"
                     android:layout_marginTop="5dp"
                     android:textSize="14sp"
                     android:textStyle="bold"

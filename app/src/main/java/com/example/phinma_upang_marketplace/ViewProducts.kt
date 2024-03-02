@@ -31,6 +31,8 @@ class ViewProducts : AppCompatActivity() {
         val product_description : TextView = findViewById(R.id.productDescription)
         val product_image = findViewById<ImageView>(R.id.productImage)
         val productPath = intent.getStringExtra("image")
+        val addCart : Button = findViewById(R.id.cartBtn)
+
 
         Glide.with(this).load(productPath).into(product_image)
 
@@ -42,6 +44,10 @@ class ViewProducts : AppCompatActivity() {
         val product_id = intent.getStringExtra("productId").toString()
         val seller_id = intent.getStringExtra("sellerId")
         val buyerName = intent.getStringExtra("fname") + " " + intent.getStringExtra("lname")
+
+        addCart.setOnClickListener{
+            addCart(product_id, authToken!!)
+        }
 
         buyBtn.setOnClickListener{
             val intent = Intent(this, ConfirmOrder::class.java)
@@ -58,6 +64,7 @@ class ViewProducts : AppCompatActivity() {
     }
 
     fun findSeller(){
+        //TODO: FIND THE SELLER OF THE PRODUCT
         val sellerId = intent.getStringExtra("sellerId")
 
         val retrofit = Retrofit.Builder()
@@ -66,12 +73,46 @@ class ViewProducts : AppCompatActivity() {
             .build()
 
         val service = retrofit.create(ItemsInterface::class.java)
+    }
 
+    fun addCart(productId: String, authToken: String){
+        //THIS FUNCTION ADDS A PRODUCT TO THE USER'S CART
+        val itemsInterface = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        Log.d("ViewProducts", "Product ID: "+productId.toInt())
+        Log.d("ViewProducts", "Token: $authToken")
+
+        val service = itemsInterface.create(ItemsInterface::class.java)
+        val request = ProductsRequest(productId.toInt())
+        val cartCall = service.addToCart(request , authToken)
+
+        cartCall.enqueue(object : Callback<OrderResponse> {
+            override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(applicationContext, "Success", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, "Something went wrong with the server", Toast.LENGTH_SHORT).show()
+                    Log.d("ViewProducts", "Unsuccessful response: ${response.code()} \n ${response.errorBody()?.string()} \n ${response.message()} \n ${response.raw()}")
+                    Log.d("ViewProducts", "Unsuccessful response:" + response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+                Toast.makeText(
+                    applicationContext,
+                    "Failed to add to cart", Toast.LENGTH_SHORT).show()
+                Log.d("ViewProducts", "onFailure" + t.message)
+            }
+        })
 
     }
 
     fun addLike(productId: String, authToken: String){
         //THIS FUNCTION ADDS A PRODUCT TO THE USER'S LIKED ITEMS
+        //KEEP THIS FUNCTION
         val itemsInterface = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

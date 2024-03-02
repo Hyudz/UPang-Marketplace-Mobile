@@ -21,9 +21,6 @@ class HomePageActivity : AppCompatActivity() {
         shop = findViewById(R.id.startshopping)
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavigationview)
         bottomNavigationView.selectedItemId = R.id.home
-
-        val cartButton :ImageButton = findViewById(R.id.shopping_cart)
-        val messagesButton : ImageButton = findViewById(R.id.chat)
         val fname : String = intent.getStringExtra("fname").toString()
         val lname : String = intent.getStringExtra("lname").toString()
 
@@ -37,17 +34,11 @@ class HomePageActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        cartButton.setOnClickListener {
-            val intent = Intent(this, CartActivity::class.java)
-            intent.putExtra("authToken", authToken)
-            startActivity(intent)
-        }
-
-        messagesButton.setOnClickListener {
-            val intent = Intent(this, Messages::class.java)
-            intent.putExtra("authToken", authToken)
-            startActivity(intent)
-        }
+//        messagesButton.setOnClickListener {
+//            val intent = Intent(this, Messages::class.java)
+//            intent.putExtra("authToken", authToken)
+//            startActivity(intent)
+//        }
 
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -58,8 +49,8 @@ class HomePageActivity : AppCompatActivity() {
                     intent.putExtra("lname", lname)
                     startActivity(intent)
                 }
-                R.id.favorite -> {
-                    val intent = Intent(this, Likes::class.java)
+                R.id.cart -> {
+                    val intent = Intent(this, CartActivity::class.java)
                     intent.putExtra("authToken", authToken)
                     startActivity(intent)
                 }

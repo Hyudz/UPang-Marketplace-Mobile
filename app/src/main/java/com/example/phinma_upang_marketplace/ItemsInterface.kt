@@ -7,11 +7,9 @@ import ProductsFetch
 import RemoveRequest
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface ItemsInterface {
     @GET("product") //GET ALL THE PRODUCTS AND DISPLAY USING RECYCLER VIEW
@@ -22,6 +20,9 @@ interface ItemsInterface {
 
     @GET("likes") // same sa first function to pero for likes
     fun getLikes(@Header("Authorization") token: String): Call<List<ProductsFetch>>
+
+    @GET("cart") //nakalimutan ko nanaman endpoint
+    fun getCart(@Header("Authorization") token: String): Call<List<ProductsFetch>>
 
     @POST("likes/add") //add an item to likes page
     fun addLike(@Body productRequest: ProductsRequest, @Header("Authorization") token: String): Call<OrderResponse>
@@ -34,4 +35,7 @@ interface ItemsInterface {
 
     @GET("/users") //hindi ko pa alam yung endpoint
     fun getSeller(): Call<Void>
+
+    @POST("add_to_cart")
+    fun addToCart(@Body productRequest: ProductsRequest, @Header("Authorization") token: String): Call<OrderResponse>
 }

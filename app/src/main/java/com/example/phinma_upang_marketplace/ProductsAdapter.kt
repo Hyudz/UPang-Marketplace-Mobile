@@ -47,11 +47,9 @@ class ProductsAdapter(private val context: Context, private val products: List<P
             context.startActivity(intent)
         }
     }
-
     override fun getItemCount(): Int {
         return products.size
     }
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textProductName: TextView = itemView.findViewById(R.id.textProductName)
         val textProductPrice: TextView = itemView.findViewById(R.id.textProductPrice)
