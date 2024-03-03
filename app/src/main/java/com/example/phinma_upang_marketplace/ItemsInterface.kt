@@ -38,4 +38,7 @@ interface ItemsInterface {
 
     @POST("add_to_cart")
     fun addToCart(@Body productRequest: ProductsRequest, @Header("Authorization") token: String): Call<OrderResponse>
+
+    @POST("remove_from_cart")
+    fun removeFromCart(@Body removeRequest: RemoveRequest, @Header("Authorization") token: String): Call<OrderResponse>
 }

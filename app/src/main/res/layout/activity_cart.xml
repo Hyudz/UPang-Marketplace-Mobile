@@ -6,26 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".CartActivity">
 
-    <SearchView
-        android:id="@+id/cartview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:queryHint="Search into your cart"
-        android:iconifiedByDefault="false"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/searchview_background"
-        android:queryBackground="@android:color/transparent"
-        />
-
     <ListView
         android:id="@+id/cart_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cartview"
-        />
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

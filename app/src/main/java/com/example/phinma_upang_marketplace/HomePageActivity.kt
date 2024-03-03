@@ -52,6 +52,8 @@ class HomePageActivity : AppCompatActivity() {
                 R.id.cart -> {
                     val intent = Intent(this, CartActivity::class.java)
                     intent.putExtra("authToken", authToken)
+                    intent.putExtra("fname", fname)
+                    intent.putExtra("lname", lname)
                     startActivity(intent)
                 }
                 R.id.notification -> {
@@ -62,6 +64,8 @@ class HomePageActivity : AppCompatActivity() {
                 R.id.profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
                     intent.putExtra("authToken", authToken)
+                    intent.putExtra("fname", fname)
+                    intent.putExtra("lname", lname)
                     startActivity(intent)
                 }
             }

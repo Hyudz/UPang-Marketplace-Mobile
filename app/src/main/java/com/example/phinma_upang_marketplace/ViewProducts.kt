@@ -92,7 +92,8 @@ class ViewProducts : AppCompatActivity() {
         cartCall.enqueue(object : Callback<OrderResponse> {
             override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(applicationContext, "Success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_SHORT).show()
+                    Log.d("ViewProducts", "Successful response:" + response.body())
                 } else {
                     Toast.makeText(applicationContext, "Something went wrong with the server", Toast.LENGTH_SHORT).show()
                     Log.d("ViewProducts", "Unsuccessful response: ${response.code()} \n ${response.errorBody()?.string()} \n ${response.message()} \n ${response.raw()}")

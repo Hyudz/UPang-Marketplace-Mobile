@@ -33,12 +33,9 @@ class ConfirmOrder : AppCompatActivity() {
         buyerName = findViewById(R.id.buyerName)
         val textView = findViewById<TextView>(R.id.textView2)
 
-        //TODO: ADD TO CART KINEMEKEME
-        //TODO: MESSAGING SYSTEM
-
+        Log.d("ConfirmOrder", intent.getStringExtra("buyerName").toString())
         buyerName.text = intent.getStringExtra("buyerName").toString()
         textView.text = "$productName \n$productPrice"
-        //TODO: Add product quantity?
         //TODO: Add Seller details
         //TODO: Add payment method (last na yun)
 

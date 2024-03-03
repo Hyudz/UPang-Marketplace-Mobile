@@ -19,6 +19,9 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        val fname = intent.getStringExtra("fname")
+        val lname = intent.getStringExtra("lname")
+
         // create a retrofit instance
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -30,7 +33,8 @@ class CartActivity : AppCompatActivity() {
         // ANG ALAM KO INTERFACE TO EG
         val retrofitData = retrofit.create(ItemsInterface::class.java)
         val service = retrofitData.getCart(authToken!!)
-        val adapter = CartAdapter(this, R.layout.item_cart,  mutableListOf())
+        val adapter = CartAdapter(this, R.layout.item_cart, mutableListOf(), authToken, fname!!, lname!!)
+        Log.d("CartActivity", "$fname $lname")
 
         service.enqueue(object : Callback<List<ProductsFetch>?> {
             override fun onResponse(

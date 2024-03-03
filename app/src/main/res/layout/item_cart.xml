@@ -27,7 +27,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -38,8 +38,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
-
-
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -62,11 +60,31 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
-
-
-
             </LinearLayout>
-            
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remove"
+                    android:id="@+id/remove_item"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@color/Red"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Checkout Item"
+                    android:id="@+id/purchase_item"
+                    android:layout_gravity="end"/>
+            </LinearLayout>
+
         </LinearLayout>
         
     </androidx.constraintlayout.widget.ConstraintLayout>

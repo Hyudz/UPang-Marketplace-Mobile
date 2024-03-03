@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +21,12 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        val profileName : TextView = findViewById(R.id.profileName)
+        val fname = intent.getStringExtra("fname")
+        val lname = intent.getStringExtra("lname")
+        val fullName = "$fname $lname"
+        profileName.text = fullName
+
         logoutBtn = findViewById(R.id.logoutButton)
         logoutBtn.setOnClickListener {
             logout()
@@ -30,10 +37,10 @@ class ProfileActivity : AppCompatActivity() {
             editProfile()
         }
 
-        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
-        dashboardBtn.setOnClickListener {
-            sellerDashboard()
-        }
+//        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
+//        dashboardBtn.setOnClickListener {
+//            sellerDashboard()
+//        }
 
         val purchaseHistoryBtn : Button = findViewById(R.id.purchaseHistoryButton)
         purchaseHistoryBtn.setOnClickListener {
