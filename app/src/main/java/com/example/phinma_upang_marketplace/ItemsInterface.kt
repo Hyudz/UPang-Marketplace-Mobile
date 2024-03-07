@@ -1,8 +1,12 @@
 package com.example.phinma_upang_marketplace
 
+<<<<<<< HEAD
 import GetData
 import HistoryResponse
 import OrderRequest
+=======
+import HistoryResponse
+>>>>>>> e8f22e59d0ab84885296a5facde11f79f9f0407f
 import OrderResponse
 import PostProduct
 import ProductsRequest
@@ -46,6 +50,7 @@ interface ItemsInterface {
     @POST("remove_from_cart")
     fun removeFromCart(@Body removeRequest: RemoveRequest, @Header("Authorization") token: String): Call<OrderResponse>
 
+<<<<<<< HEAD
     @GET("buyerProfile")
     fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
 
@@ -60,4 +65,8 @@ interface ItemsInterface {
 
     @DELETE("deleteProfile/{id}")
     fun deleteProfile(@Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
+=======
+    @GET("history")
+    fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
+>>>>>>> e8f22e59d0ab84885296a5facde11f79f9f0407f
 }

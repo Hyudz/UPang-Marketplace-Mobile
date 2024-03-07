@@ -12,7 +12,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class PurchaseHistory : AppCompatActivity() {
+<<<<<<< HEAD
     private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
+=======
+    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+>>>>>>> e8f22e59d0ab84885296a5facde11f79f9f0407f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_purchase_history)
