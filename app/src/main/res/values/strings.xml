@@ -180,4 +180,11 @@
     <string name="i_am_looking_for">I am looking for...</string>
     <string name="item_categories">Item Categories:</string>
     <string name="home">Home</string>
+    <string name="buyer_details">Buyer details</string>
+    <string name="order_details">Order details</string>
+    <string name="seller_details">Seller Details</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="message_optional">Message (optional)</string>
+    <string name="edit_fName">First Name</string>
 </resources>

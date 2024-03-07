@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var email: EditText
     private lateinit var password: EditText
     private lateinit var loginBtn: Button
-    val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+//    val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
+//    val BASE_URL = "https://127.0.0.1:8000/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +75,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e("NetworkError", "Failed to make network call", t)
+                Log.e("NetworkError", "Request URL: ${call.request().url()}")
+                Log.e("NetworkError", "Request Method: ${call.request().method()}")
+                Log.e("NetworkError", "Request Headers: ${call.request().headers()}")
+                Log.e("NetworkError", "Request Body: ${call.request()}")
+                Log.e("NetworkError", "Request Body: ${call.request().body()}")
                 Toast.makeText(applicationContext, "Network error. Please try again.", Toast.LENGTH_SHORT).show()
             }
         })

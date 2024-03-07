@@ -14,6 +14,7 @@
         android:layout_height="93dp"
         android:layout_marginTop="56dp"
         android:src="@drawable/ic_launcher_foreground"
+        android:background="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,9 +43,10 @@
     <Button
         android:id="@+id/editProfileButton"
         android:layout_width="310dp"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:text="Edit Profile"
         android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/purchaseHistoryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -52,9 +54,10 @@
     <Button
         android:id="@+id/purchaseHistoryButton"
         android:layout_width="310dp"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:text="Purchase History"
         android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/logoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -62,10 +65,11 @@
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="310dp"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="288dp"
         android:text="Logout"
+        android:backgroundTint="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

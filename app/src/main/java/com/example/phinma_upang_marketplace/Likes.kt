@@ -15,7 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Likes : AppCompatActivity() {
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     private var recyclerView: RecyclerView? = null
     private var adapter: LikesAdapter? = null
     private var like = mutableListOf<ProductsFetch>()

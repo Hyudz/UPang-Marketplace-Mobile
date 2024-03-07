@@ -30,7 +30,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var gender: Spinner
     private lateinit var passwordConfirm : EditText
 
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)

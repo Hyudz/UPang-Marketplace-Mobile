@@ -20,7 +20,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ViewProducts : AppCompatActivity() {
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_products)
@@ -42,7 +42,6 @@ class ViewProducts : AppCompatActivity() {
         product_price.text = intent.getStringExtra("product_price")
         product_description.text = intent.getStringExtra("product_description")
         val product_id = intent.getStringExtra("productId").toString()
-        val seller_id = intent.getStringExtra("sellerId")
         val buyerName = intent.getStringExtra("fname") + " " + intent.getStringExtra("lname")
 
         addCart.setOnClickListener{
@@ -55,7 +54,6 @@ class ViewProducts : AppCompatActivity() {
             intent.putExtra("product_id", product_id)
             intent.putExtra("product_name", product_name.text.toString())
             intent.putExtra("product_price", product_price.text.toString())
-            intent.putExtra("seller_id", seller_id)
             intent.putExtra("product_image", productPath)
             intent.putExtra("buyerName", buyerName)
             startActivity(intent)
@@ -82,9 +80,6 @@ class ViewProducts : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        Log.d("ViewProducts", "Product ID: "+productId.toInt())
-        Log.d("ViewProducts", "Token: $authToken")
-
         val service = itemsInterface.create(ItemsInterface::class.java)
         val request = ProductsRequest(productId.toInt())
         val cartCall = service.addToCart(request , authToken)
@@ -106,6 +101,11 @@ class ViewProducts : AppCompatActivity() {
                     applicationContext,
                     "Failed to add to cart", Toast.LENGTH_SHORT).show()
                 Log.d("ViewProducts", "onFailure" + t.message)
+                Log.d(  "ViewProducts", "Request URL: ${call.request().url()}")
+                Log.d(  "ViewProducts", "Request Method: ${call.request().method()}")
+                Log.d(  "ViewProducts", "Request Headers: ${call.request().headers()}")
+                Log.d(  "ViewProducts", "Request Body: ${call.request()}")
+                Log.d(  "ViewProducts", "Request Body: ${call.request().body()}")
             }
         })
 

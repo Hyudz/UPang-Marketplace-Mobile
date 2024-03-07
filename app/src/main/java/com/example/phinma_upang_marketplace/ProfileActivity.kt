@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var logoutBtn : Button
-    val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -25,6 +25,8 @@ class ProfileActivity : AppCompatActivity() {
         val fname = intent.getStringExtra("fname")
         val lname = intent.getStringExtra("lname")
         val fullName = "$fname $lname"
+        val authToken = intent.getStringExtra("authToken")
+        Log.d("ProfileActivity", "Auth Token: $authToken")
         profileName.text = fullName
 
         logoutBtn = findViewById(R.id.logoutButton)
@@ -34,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val editProfile : Button = findViewById(R.id.editProfileButton)
         editProfile.setOnClickListener {
-            editProfile()
+            editProfile(authToken!!)
         }
 
 //        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
@@ -44,12 +46,13 @@ class ProfileActivity : AppCompatActivity() {
 
         val purchaseHistoryBtn : Button = findViewById(R.id.purchaseHistoryButton)
         purchaseHistoryBtn.setOnClickListener {
-            purchaseHistory()
+            purchaseHistory(authToken!!)
         }
     }
 
-    fun editProfile() {
+    fun editProfile(authToken: String) {
         val intent = Intent(this, ProfileSettingActivity::class.java)
+        intent.putExtra("authToken", authToken)
         startActivity(intent)
     }
 
@@ -58,8 +61,10 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun purchaseHistory() {
+    fun purchaseHistory(authToken: String) {
         val intent = Intent(this, PurchaseHistory::class.java)
+        intent.putExtra("authToken", authToken)
+        Log.d("ProfileActivity", "Auth $authToken")
         startActivity(intent)
     }
 

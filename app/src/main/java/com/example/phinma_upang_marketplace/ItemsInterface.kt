@@ -1,22 +1,29 @@
 package com.example.phinma_upang_marketplace
 
+import GetData
+import HistoryResponse
+import OrderRequest
 import OrderResponse
 import PostProduct
 import ProductsRequest
 import ProductsFetch
+import ProfileRequest
 import RemoveRequest
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ItemsInterface {
     @GET("product") //GET ALL THE PRODUCTS AND DISPLAY USING RECYCLER VIEW
     fun getItems(@Header("Authorization") token : String): Call<List<ProductsFetch>>
 
-    @POST("orders") //eto yung sa checkout ng item
-    fun orderedItems(@Body productRequest: ProductsRequest, @Header("Authorization") token: String): Call<OrderResponse>
+    @POST("purchase") //eto yung sa checkout ng item
+    fun orderedItems(@Body orderRequest: OrderRequest, @Header("Authorization") token: String): Call<OrderResponse>
 
     @GET("likes") // same sa first function to pero for likes
     fun getLikes(@Header("Authorization") token: String): Call<List<ProductsFetch>>
@@ -33,12 +40,24 @@ interface ItemsInterface {
     @POST("products") //for sellers to post a product
     fun postProduct(@Body productRequest: PostProduct, @Header("Authorization") token: String): Call<Void> //TODO: Change the return type to the response of the post request
 
-    @GET("/users") //hindi ko pa alam yung endpoint
-    fun getSeller(): Call<Void>
-
     @POST("add_to_cart")
     fun addToCart(@Body productRequest: ProductsRequest, @Header("Authorization") token: String): Call<OrderResponse>
 
     @POST("remove_from_cart")
     fun removeFromCart(@Body removeRequest: RemoveRequest, @Header("Authorization") token: String): Call<OrderResponse>
+
+    @GET("buyerProfile")
+    fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
+
+    @GET("getBuyer") //hindi ko pa alam yung endpoint
+    fun getBuyer(@Header("Authorization") token: String): Call<GetData>
+
+    @POST("getSeller") //hindi ko pa alam yung endpoint
+    fun getSeller(@Body productRequest: ProductsRequest, @Header("Authorization") token: String): Call<GetData>
+
+    @PUT("updateProfile/{id}")
+    fun updateProfile(@Body profileRequest : ProfileRequest, @Header("Authorization") token: String, @Path("id") id : Int): Call<OrderResponse>
+
+    @DELETE("deleteProfile/{id}")
+    fun deleteProfile(@Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
 }

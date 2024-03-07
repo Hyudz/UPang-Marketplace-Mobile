@@ -19,7 +19,7 @@ class Notifications : AppCompatActivity() {
     private var recyclerView: RecyclerView? = null
     private var adapter: NotificationAdapter? = null
     private var notification = mutableListOf<NotificationGet>()
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

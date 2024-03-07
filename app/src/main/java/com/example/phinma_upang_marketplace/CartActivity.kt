@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class CartActivity : AppCompatActivity() {
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class CartActivity : AppCompatActivity() {
 
         val authToken = intent.getStringExtra("authToken")
 
-        // ANG ALAM KO INTERFACE TO EG
+        // ANG ALAM KO INTERFACE TO EH
         val retrofitData = retrofit.create(ItemsInterface::class.java)
         val service = retrofitData.getCart(authToken!!)
         val adapter = CartAdapter(this, R.layout.item_cart, mutableListOf(), authToken, fname!!, lname!!)

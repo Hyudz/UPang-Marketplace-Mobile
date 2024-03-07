@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProductItem : AppCompatActivity() {
     //THIS FILE CONTAINS THE CODE FOR THE PRODUCT ITEM PAGE
     //IT GETS THE PRODUCT DATA FROM THE API AND DISPLAYS IT IN A RECYCLER VIEW
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     private var recyclerView: RecyclerView? = null
     private var adapter: ProductsAdapter? = null
     private var products = mutableListOf<ProductsFetch>()

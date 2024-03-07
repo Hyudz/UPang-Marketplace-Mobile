@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CartAdapter(context: Context, resource: Int, items: List<ProductsFetch>, private val authToken: String, private val fname : String, private val lname : String) :
     ArrayAdapter<ProductsFetch>(context, resource, items) {
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
+    val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater = LayoutInflater.from(context)
@@ -95,12 +95,20 @@ class CartAdapter(context: Context, resource: Int, items: List<ProductsFetch>, p
                     Toast.makeText(context, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
                     Log.d("CartAdapter", "Unsuccessful response: ${response.code()}")
                     Log.d("CartAdapter", "Unsuccessful response: ${response.errorBody()}")
+                    Log.d("CartAdapter", "Unsuccessful response: ${response.message()}")
+                    Log.d("CartAdapter", "Unsuccessful response: ${response.headers()}")
+                    Log.d("CartAdapter", "Unsuccessful response: ${response.raw()}")
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<OrderResponse>, t: Throwable) {
                 Toast.makeText(context, "Failed to remove item from cart", Toast.LENGTH_SHORT).show()
                 Log.d("CartAdapter", "onFailure" + t.message)
+                Log.d("CartAdapter", "onFailure" + call.request().url())
+                Log.d("CartAdapter", "onFailure" + call.request().method())
+                Log.d("CartAdapter", "onFailure" + call.request().headers())
+                Log.d("CartAdapter", "onFailure" + call.request().body())
+
             }
         })
     }
