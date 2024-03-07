@@ -73,6 +73,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e("NetworkError", "Failed to make network call", t)
+                Log.d("ProductItem", "Failed to fetch Liked Items: $t")
+                Log.d("ProductItem", "Request URL: ${call.request().url()}")
+                Log.d("ProductItem", "Request Method: ${call.request().method()}")
+                Log.d("ProductItem", "Request Headers: ${call.request().headers()}")
+                Log.d("ProductItem", "Request Body: ${call.request()}")
+                Log.d("ProductItem", "Request Body: ${call.request().body()}")
                 Toast.makeText(applicationContext, "Network error. Please try again.", Toast.LENGTH_SHORT).show()
             }
         })

@@ -30,7 +30,7 @@ class CartActivity : AppCompatActivity() {
 
         val authToken = intent.getStringExtra("authToken")
 
-        // ANG ALAM KO INTERFACE TO EG
+        // ANG ALAM KO INTERFACE TO EH
         val retrofitData = retrofit.create(ItemsInterface::class.java)
         val service = retrofitData.getCart(authToken!!)
         val adapter = CartAdapter(this, R.layout.item_cart, mutableListOf(), authToken, fname!!, lname!!)

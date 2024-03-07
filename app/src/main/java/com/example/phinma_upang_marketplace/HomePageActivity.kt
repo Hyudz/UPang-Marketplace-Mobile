@@ -64,6 +64,7 @@ class HomePageActivity : AppCompatActivity() {
                 R.id.profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
                     intent.putExtra("authToken", authToken)
+                    Log.d("HomePageActivity", "Auth Token: $authToken")
                     intent.putExtra("fname", fname)
                     intent.putExtra("lname", lname)
                     startActivity(intent)

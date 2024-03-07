@@ -1,5 +1,6 @@
 package com.example.phinma_upang_marketplace
 
+import HistoryResponse
 import OrderResponse
 import PostProduct
 import ProductsRequest
@@ -41,4 +42,7 @@ interface ItemsInterface {
 
     @POST("remove_from_cart")
     fun removeFromCart(@Body removeRequest: RemoveRequest, @Header("Authorization") token: String): Call<OrderResponse>
+
+    @GET("history")
+    fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
 }

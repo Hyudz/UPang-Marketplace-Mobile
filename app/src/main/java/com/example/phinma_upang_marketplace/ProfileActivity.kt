@@ -25,6 +25,8 @@ class ProfileActivity : AppCompatActivity() {
         val fname = intent.getStringExtra("fname")
         val lname = intent.getStringExtra("lname")
         val fullName = "$fname $lname"
+        val authToken = intent.getStringExtra("authToken")
+        Log.d("ProfileActivity", "Auth Token: $authToken")
         profileName.text = fullName
 
         logoutBtn = findViewById(R.id.logoutButton)
@@ -44,7 +46,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val purchaseHistoryBtn : Button = findViewById(R.id.purchaseHistoryButton)
         purchaseHistoryBtn.setOnClickListener {
-            purchaseHistory()
+            purchaseHistory(authToken!!)
         }
     }
 
@@ -58,8 +60,10 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun purchaseHistory() {
+    fun purchaseHistory(authToken: String) {
         val intent = Intent(this, PurchaseHistory::class.java)
+        intent.putExtra("authToken", authToken)
+        Log.d("ProfileActivity", "Auth $authToken")
         startActivity(intent)
     }
 
