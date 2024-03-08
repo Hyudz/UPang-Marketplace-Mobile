@@ -1,14 +1,12 @@
 package com.example.phinma_upang_marketplace
 
-<<<<<<< HEAD
 import GetData
 import HistoryResponse
+import OrderHistory
 import OrderRequest
-=======
-import HistoryResponse
->>>>>>> e8f22e59d0ab84885296a5facde11f79f9f0407f
 import OrderResponse
 import PostProduct
+import ProductHistory
 import ProductsRequest
 import ProductsFetch
 import ProfileRequest
@@ -50,10 +48,6 @@ interface ItemsInterface {
     @POST("remove_from_cart")
     fun removeFromCart(@Body removeRequest: RemoveRequest, @Header("Authorization") token: String): Call<OrderResponse>
 
-<<<<<<< HEAD
-    @GET("buyerProfile")
-    fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
-
     @GET("getBuyer") //hindi ko pa alam yung endpoint
     fun getBuyer(@Header("Authorization") token: String): Call<GetData>
 
@@ -65,8 +59,16 @@ interface ItemsInterface {
 
     @DELETE("deleteProfile/{id}")
     fun deleteProfile(@Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
-=======
-    @GET("history")
-    fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
->>>>>>> e8f22e59d0ab84885296a5facde11f79f9f0407f
+
+    @GET("buyerProfile")
+    fun getHistory(@Header("Authorization") token: String): Call<List<HistoryResponse>>
+
+    @GET("sellerProfile")
+    fun getSellerHistory(@Header("Authorization") token: String): Call<List<ProductsFetch>>
+
+    @POST("cancelOrder")
+    fun cancelOrder(@Body orderId: OrderHistory, @Header("Authorization") token: String): Call<OrderResponse>
+
+    @POST("orderSettled")
+    fun settleOrder(@Body product_id: ProductHistory, @Header("Authorization") token: String): Call<OrderResponse>
 }

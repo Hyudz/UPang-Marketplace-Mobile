@@ -65,7 +65,6 @@ class CartActivity : AppCompatActivity() {
         })
 
         val listView: ListView = findViewById(R.id.cart_item)
-
         listView.adapter = adapter
     }
 }

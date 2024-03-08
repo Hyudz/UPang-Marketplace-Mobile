@@ -1,5 +1,6 @@
 package com.example.phinma_upang_marketplace
 
+import GetData
 import LogoutResponse
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,6 @@ class ProfileActivity : AppCompatActivity() {
         val lname = intent.getStringExtra("lname")
         val fullName = "$fname $lname"
         val authToken = intent.getStringExtra("authToken")
-        Log.d("ProfileActivity", "Auth Token: $authToken")
         profileName.text = fullName
 
         logoutBtn = findViewById(R.id.logoutButton)
@@ -46,7 +46,7 @@ class ProfileActivity : AppCompatActivity() {
 
         val purchaseHistoryBtn : Button = findViewById(R.id.purchaseHistoryButton)
         purchaseHistoryBtn.setOnClickListener {
-            purchaseHistory(authToken!!)
+            getUser(authToken!!)
         }
     }
 
@@ -61,9 +61,10 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun purchaseHistory(authToken: String) {
+    fun purchaseHistory(authToken: String, usertype : String) {
         val intent = Intent(this, PurchaseHistory::class.java)
         intent.putExtra("authToken", authToken)
+        intent.putExtra("usertype", usertype)
         Log.d("ProfileActivity", "Auth $authToken")
         startActivity(intent)
     }
@@ -99,5 +100,33 @@ class ProfileActivity : AppCompatActivity() {
         })
 
     }
+
+    fun getUser(authToken : String){
+        var usertype : String
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retrofitData = retrofit.create(ItemsInterface::class.java)
+        val service = retrofitData.getBuyer(authToken)
+        service.enqueue(object : retrofit2.Callback<GetData> {
+            override fun onResponse(call: retrofit2.Call<GetData>, response: retrofit2.Response<GetData>) {
+                if (response.isSuccessful) {
+                    usertype = response.body()!!.user_type
+                    purchaseHistory(authToken, usertype)
+                    Log.d("ProfileSettingActivity", "User Type: $usertype")
+                } else {
+                    //Toast.makeText(this, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<GetData>, t: Throwable) {
+                //Toast.makeText(this, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
 
 }

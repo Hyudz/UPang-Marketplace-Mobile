@@ -16,4 +16,6 @@ interface LoginInterface {
 
     @POST("logout")
     fun logout(@Header("Authorization") authToken: String): Call<LogoutResponse>
+
+    fun usertype(userType: String)
 }

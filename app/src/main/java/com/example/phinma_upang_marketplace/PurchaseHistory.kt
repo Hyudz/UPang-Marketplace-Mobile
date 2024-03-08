@@ -1,9 +1,11 @@
 package com.example.phinma_upang_marketplace
 
 import HistoryResponse
+import ProductsFetch
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ListView
 import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,58 +14,79 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class PurchaseHistory : AppCompatActivity() {
-<<<<<<< HEAD
     private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
-=======
-    private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
->>>>>>> e8f22e59d0ab84885296a5facde11f79f9f0407f
+    //private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_purchase_history)
+        val authToken = intent.getStringExtra("authToken")
+        val usertype = intent.getStringExtra("usertype")
+        if (usertype == "buyer") {
+            underBuyer(usertype, authToken!!)
+        } else {
+            underSeller(usertype!!, authToken!!)
+        }
+    }
+
+    fun underBuyer(usertype: String, authToken: String) {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val authToken = intent.getStringExtra("authToken")
-        Log.d("PurchaseHistory", "Auth Token: $authToken")
         val retrofitData = retrofit.create(ItemsInterface::class.java)
-        val service = retrofitData.getHistory(authToken!!)
-        val adapter = HistoryAdapter(this@PurchaseHistory, R.layout.item_history, mutableListOf())
-        service.enqueue(object : Callback<HistoryResponse> {
-            override fun onResponse(call: Call<HistoryResponse>, response: Response<HistoryResponse>) {
+        val service = retrofitData.getHistory(authToken)
+        val adapter = HistoryAdapter(this@PurchaseHistory, R.layout.item_history, mutableListOf(), authToken, usertype!!)
+        service.enqueue(object : Callback<List<HistoryResponse>> {
+            override fun onResponse(call: Call<List<HistoryResponse>>, response: Response<List<HistoryResponse>>) {
                 if (response.isSuccessful) {
-                    val historyResponse = response.body()
-
-//                        Log.d("PurchaseHistory", "Histroy: ${historyResponse.copy().descriptions}")
-                        adapter.clearData()
-                        adapter.addAll(historyResponse)
-
-                    //Log.d("PurchaseHistory", "${adapter.addAll(historyResponse)}")
+                    adapter.clearData()
+                    adapter.addAll(response.body()!!)
                     adapter.notifyDataSetChanged()
-
-
-//                    Log.d("ProductItem", "Response Body: ${response.body()}")
+                    Log.d("PurchaseHistory", "Response Body: ${response.body()}")
                 } else {
                     Toast.makeText(applicationContext, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
-                    Log.d("ProductItem", "Unsuccessful response: ${response.code()}")
-                    Log.d("ProductItem", "Unsuccessful response: ${response.errorBody()}")
-
-                    Log.e("ProductItem", "Response Body: ${response.body()}")
                 }
             }
 
-            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
-
+            override fun onFailure(call: Call<List<HistoryResponse>>, t: Throwable) {
                 Toast.makeText(applicationContext, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
-                Log.d("ProductItem", "Failed to fetch Liked Items: $t")
-                Log.d("ProductItem", "Request URL: ${call.request().url()}")
-                Log.d("ProductItem", "Request Method: ${call.request().method()}")
-                Log.d("ProductItem", "Request Headers: ${call.request().headers()}")
-                Log.d("ProductItem", "Request Body: ${call.request()}")
-                Log.d("ProductItem", "Request Body: ${call.request().body()}")
-
             }
         })
+
+        val listView: ListView = findViewById(R.id.purchase_history)
+        listView.adapter = adapter
+
+    }
+
+    fun underSeller(usertype: String, authToken: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retrofitData = retrofit.create(ItemsInterface::class.java)
+        val service = retrofitData.getSellerHistory(authToken)
+        val adapter = HistoryAdapter2(this@PurchaseHistory, R.layout.item_history, mutableListOf(), authToken, usertype)
+        service.enqueue(object : Callback<List<ProductsFetch>> {
+            override fun onResponse(call: Call<List<ProductsFetch>>, response: Response<List<ProductsFetch>>) {
+                if (response.isSuccessful) {
+                    adapter.clearData()
+                    adapter.addAll(response.body()!!)
+                    adapter.notifyDataSetChanged()
+                    Log.d("PurchaseHistory", "Response Body: ${response.body()}")
+                } else {
+                    Toast.makeText(applicationContext, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<ProductsFetch>>, t: Throwable) {
+                Toast.makeText(applicationContext, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        val listView: ListView = findViewById(R.id.purchase_history)
+        listView.adapter = adapter
+
     }
 }

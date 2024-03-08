@@ -40,17 +40,6 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quantity"
-                    android:id="@+id/item_quantity"
-                    android:drawableTint="@color/black"
-                    android:layout_marginTop="5dp"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="Price Item"
                     android:id="@+id/item_price"
                     android:layout_marginTop="5dp"
@@ -80,6 +69,12 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="end"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:id="@+id/controll"/>
             </LinearLayout>
 
         </LinearLayout>
