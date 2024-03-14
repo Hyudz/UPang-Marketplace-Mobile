@@ -22,7 +22,8 @@
             android:exported="false" />
         <activity
             android:name=".PurchaseHistory"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ProfileActivity"/>
         <activity
             android:name=".Dashboard"
             android:exported="false" />
@@ -34,7 +35,8 @@
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".HomePageActivity"/>
         <activity
             android:name=".CartActivity"
             android:exported="false" />
@@ -45,21 +47,34 @@
             android:name=".Notifications"
             android:exported="false"
             android:label="@string/title_activity_notifications"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace" />
+            android:theme="@style/Theme.PHINMAUPangMarketPlace"
+            android:parentActivityName=".HomePageActivity"/>
         <activity
             android:name=".OrderConfirmed"
             android:exported="false" />
         <activity
             android:name=".ConfirmOrder"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ViewProducts"/>
         <activity
             android:name=".ViewProducts"
             android:exported="false" />
         <activity
+<<<<<<< Updated upstream
+=======
+            android:name=".ViewProduct"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_view_product"
+            android:theme="@style/Theme.PHINMAUPangMarketPlace.Fullscreen"
+            android:parentActivityName=".ProductItem"/>
+        <activity
+>>>>>>> Stashed changes
             android:name=".ProductItem"
             android:exported="false"
             android:label="@string/title_activity_product_item"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace" />
+            android:theme="@style/Theme.PHINMAUPangMarketPlace"
+            android:parentActivityName=".HomePageActivity"/>
         <activity
             android:name=".SignupActivity"
             android:exported="false" />

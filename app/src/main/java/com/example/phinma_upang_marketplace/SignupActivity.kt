@@ -84,6 +84,8 @@ class SignupActivity : AppCompatActivity() {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
                         Toast.makeText(applicationContext, "Account created successfully", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Toast.makeText(applicationContext, "Null response", Toast.LENGTH_SHORT).show()
                     }

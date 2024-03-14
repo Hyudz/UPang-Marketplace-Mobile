@@ -126,10 +126,14 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetc
         }
 
         editBtn.setOnClickListener{
+<<<<<<< Updated upstream
             val intent = android.content.Intent(context, updateProduct::class.java)
             intent.putExtra("id", currentItem?.id.toString())
             intent.putExtra("authToken", authToken)
             context.startActivity(intent)
+=======
+            Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show()
+>>>>>>> Stashed changes
         }
 
         deleteBtn.setOnClickListener{
