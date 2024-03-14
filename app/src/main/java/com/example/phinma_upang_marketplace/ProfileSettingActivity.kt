@@ -25,13 +25,6 @@ class ProfileSettingActivity : AppCompatActivity() {
         val authToken = intent.getStringExtra("authToken")
         getId(authToken!!)
         updateProfile.setOnClickListener {
-//            Log.d("Profile Setting", newFname.text.toString())
-//            Log.d("Profile Setting", newLname.text.toString())
-//            Log.d("Profile Setting", newEmail.text.toString())
-//            Log.d("Profile Setting", currentPassword.text.toString())
-//            Log.d("Profile Setting", newPassword.text.toString())
-//            Log.d("Profile Setting", confirmNewPassword.text.toString())
-//            Log.d("Profile Setting", authToken!!)
             updateProfile(authToken!!, userId.toInt())
         }
 
@@ -58,9 +51,8 @@ class ProfileSettingActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<OrderResponse> {
             override fun onResponse(call: retrofit2.Call<OrderResponse>, response: retrofit2.Response<OrderResponse>) {
                 if (response.isSuccessful) {
-
-                    val intent = Intent(this@ProfileSettingActivity, ProfileActivity::class.java)
-                    startActivity(intent)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    finish()
                     Toast.makeText(applicationContext, "Profile Updated", Toast.LENGTH_SHORT).show()
                 } else {
                     Log.d("Profile Setting", response.errorBody().toString())

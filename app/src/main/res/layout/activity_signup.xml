@@ -8,32 +8,20 @@
     tools:context=".SignupActivity">
 
 
-<ImageView
-        android:id="@+id/logogo"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:src="@drawable/logowithoutbg"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
-
     <TextView
         android:id="@+id/create_acc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
+        android:layout_marginTop="50dp"
         android:text="@string/create_account"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="22sp"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logogo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/firstname"
@@ -202,10 +190,27 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/usertype"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintTop_toBottomOf="@+id/textview4"
+        app:layout_constraintVertical_bias="0.097" />
+
+    <EditText
+        android:id="@+id/adress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/login_border"
+        android:backgroundTint="@color/DarkGray"
+        android:hint="Address"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

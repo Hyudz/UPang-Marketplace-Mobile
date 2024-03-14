@@ -26,8 +26,6 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var firstName : EditText
     private lateinit var lastName : EditText
-    private lateinit var userType : Spinner
-    private lateinit var gender: Spinner
     private lateinit var passwordConfirm : EditText
 
     private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"

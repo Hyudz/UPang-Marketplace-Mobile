@@ -103,11 +103,19 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetc
         val priceTextView: TextView = itemView.findViewById(R.id.item_price)
         val statusTextView: TextView = itemView.findViewById(R.id.productStatus)
         val controllerBtn : Button = itemView.findViewById(R.id.controll)
+        val editBtn : Button = itemView.findViewById(R.id.Edit)
+        val deleteBtn : Button = itemView.findViewById(R.id.Delete)
 
         if (currentItem?.availability == "to ship") {
                 controllerBtn.text = "Settle"
+                editBtn.visibility = View.GONE
+                deleteBtn.visibility = View.GONE
+        } else if (currentItem?.availability == "approved") {
+            controllerBtn.visibility = View.GONE
         } else {
             controllerBtn.visibility = View.GONE
+            editBtn.visibility = View.GONE
+            deleteBtn.visibility = View.GONE
         }
 
         controllerBtn.setOnClickListener{
@@ -115,6 +123,17 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetc
                 setlleOrder(currentItem?.id!!)
                 Log.d("HistoryAdapter2", "${currentItem?.id}")
             }
+        }
+
+        editBtn.setOnClickListener{
+            val intent = android.content.Intent(context, updateProduct::class.java)
+            intent.putExtra("id", currentItem?.id.toString())
+            intent.putExtra("authToken", authToken)
+            context.startActivity(intent)
+        }
+
+        deleteBtn.setOnClickListener{
+            deleteProduct(currentItem?.id!!, authToken)
         }
 
         itemNameTextView.text = currentItem?.name
@@ -146,13 +165,29 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetc
                 if (response.isSuccessful) {
                     Toast.makeText(context, "Order Settled", Toast.LENGTH_SHORT).show()
                 } else {
-                    Log.d("PurchaseHistory", "Response Body: ${response.body()}")
-                    Log.d("PurchaseHistory", "Response Code: ${response.code()}")
-                    Log.d("PurchaseHistory", "Response Message: ${response.message()}")
-                    Log.d("PurchaseHistory", "Response Error Body: ${response.errorBody()}")
-                    Log.d("PurchaseHistory", "Response Raw: ${response.raw()}")
-                    Log.d("HistoryAdapter2", "Response Header: ${response.headers()}")
+                    Toast.makeText(context, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            }
 
+            override fun onFailure(call: retrofit2.Call<OrderResponse>, t: Throwable) {
+                Toast.makeText(context, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun deleteProduct(id: Int, authToken: String){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retrofitData = retrofit.create(ItemsInterface::class.java)
+        val service = retrofitData.deleteProduct(authToken, id)
+        service.enqueue(object : retrofit2.Callback<OrderResponse> {
+            override fun onResponse(call: retrofit2.Call<OrderResponse>, response: retrofit2.Response<OrderResponse>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Product Deleted", Toast.LENGTH_SHORT).show()
+                } else {
                     Toast.makeText(context, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
                 }
             }

@@ -15,8 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PHINMAUPangMarketPlace"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".updateProduct"
+            android:exported="false" />
         <activity
             android:name=".PurchaseHistory"
             android:exported="false" />
@@ -53,24 +56,10 @@
             android:name=".ViewProducts"
             android:exported="false" />
         <activity
-            android:name=".ViewProduct"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_view_product"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace.Fullscreen" />
-        <activity
             android:name=".ProductItem"
             android:exported="false"
             android:label="@string/title_activity_product_item"
             android:theme="@style/Theme.PHINMAUPangMarketPlace" />
-        <activity
-            android:name=".ItemLayout"
-            android:exported="false" />
-        <activity
-            android:name=".ProductsList"
-            android:exported="false"
-            android:label="@string/title_activity_products_list"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace.NoActionBar" />
         <activity
             android:name=".SignupActivity"
             android:exported="false" />

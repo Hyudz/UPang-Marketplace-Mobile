@@ -71,4 +71,10 @@ interface ItemsInterface {
 
     @POST("orderSettled")
     fun settleOrder(@Body product_id: ProductHistory, @Header("Authorization") token: String): Call<OrderResponse>
+
+    @DELETE("deleteProduct/{id}")
+    fun deleteProduct(@Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
+
+    @PUT("updateProduct/{id}")
+    fun updateProduct(@Body productRequest: PostProduct, @Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
 }

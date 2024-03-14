@@ -70,11 +70,32 @@
                     android:textStyle="bold"
                     android:layout_gravity="end"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Edit"
+                    android:id="@+id/Edit"/>
+
+                <Button
+                    android:id="@+id/Delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Delete" />
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:id="@+id/controll"/>
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
