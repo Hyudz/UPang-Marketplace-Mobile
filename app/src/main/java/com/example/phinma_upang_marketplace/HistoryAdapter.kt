@@ -4,10 +4,12 @@ import GetData
 import HistoryResponse
 import OrderHistory
 import OrderResponse
+import ProductDetail
 import ProductHistory
 import ProductsFetch
 import ProductsRequest
 import RemoveRequest
+import SellerResponse
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,7 +43,7 @@ class HistoryAdapter (context: Context, resource: Int, items: List<HistoryRespon
 
         controllerBtn.setOnClickListener{
             if (usertype == "buyer"){
-                cancelOrder(currentItem?.id!!)
+                cancelOrder(currentItem?.order_id!!)
             }
         }
 
@@ -91,8 +93,8 @@ class HistoryAdapter (context: Context, resource: Int, items: List<HistoryRespon
 
 }
 
-class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetch>, val authToken : String, val usertype : String) :
-    ArrayAdapter<ProductsFetch>(context, resource, items) {
+class HistoryAdapter2 (context: Context, resource: Int, items: List<SellerResponse>, val authToken : String, val usertype : String) :
+    ArrayAdapter<SellerResponse>(context, resource, items) {
     val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -106,39 +108,41 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetc
         val editBtn : Button = itemView.findViewById(R.id.Edit)
         val deleteBtn : Button = itemView.findViewById(R.id.Delete)
 
-        if (currentItem?.availability == "to ship") {
-                controllerBtn.text = "Settle"
-                editBtn.visibility = View.GONE
-                deleteBtn.visibility = View.GONE
-        } else if (currentItem?.availability == "approved") {
-            controllerBtn.visibility = View.GONE
-        } else {
-            controllerBtn.visibility = View.GONE
-            editBtn.visibility = View.GONE
-            deleteBtn.visibility = View.GONE
-        }
+        Log.d("HistoryAdapter2", "Current Item: $currentItem")
 
-        controllerBtn.setOnClickListener{
-            if (usertype == "seller"){
-                setlleOrder(currentItem?.id!!)
-                Log.d("HistoryAdapter2", "${currentItem?.id}")
-            }
-        }
-
-        editBtn.setOnClickListener{
-            val intent = android.content.Intent(context, updateProduct::class.java)
-            intent.putExtra("id", currentItem?.id.toString())
-            intent.putExtra("authToken", authToken)
-            context.startActivity(intent)
-        }
-
-        deleteBtn.setOnClickListener{
-            deleteProduct(currentItem?.id!!, authToken)
-        }
-
-        itemNameTextView.text = currentItem?.name
-        priceTextView.text = currentItem?.price.toString()
-        statusTextView.text = currentItem?.availability
+//        if (currentItem?.availability == "to ship") {
+//                controllerBtn.text = "Settle"
+//                editBtn.visibility = View.GONE
+//                deleteBtn.visibility = View.GONE
+//        } else if (currentItem?.availability == "approved") {
+//            controllerBtn.visibility = View.GONE
+//        } else {
+//            controllerBtn.visibility = View.GONE
+//            editBtn.visibility = View.GONE
+//            deleteBtn.visibility = View.GONE
+//        }
+//
+//        controllerBtn.setOnClickListener{
+//            if (usertype == "seller"){
+//                setlleOrder(currentItem?.id!!)
+//                Log.d("HistoryAdapter2", "${currentItem?.id}")
+//            }
+//        }
+//
+//        editBtn.setOnClickListener{
+//            val intent = android.content.Intent(context, updateProduct::class.java)
+//            intent.putExtra("id", currentItem?.id.toString())
+//            intent.putExtra("authToken", authToken)
+//            context.startActivity(intent)
+//        }
+//
+//        deleteBtn.setOnClickListener{
+//            deleteProduct(currentItem?.id!!, authToken)
+//        }
+//
+//        itemNameTextView.text = currentItem?.name
+//        priceTextView.text = currentItem?.price.toString()
+//        statusTextView.text = currentItem?.availability
 
         return itemView
     }
@@ -147,7 +151,7 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<ProductsFetc
         super.clear()
     }
 
-    fun addAll(items: List<ProductsFetch>) {
+    fun addAll(items: List<SellerResponse>) {
         super.addAll(items)
     }
 

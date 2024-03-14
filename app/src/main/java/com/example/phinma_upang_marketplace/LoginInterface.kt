@@ -4,9 +4,7 @@ import LoginRequest
 import LoginResponse
 import LogoutResponse
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -17,5 +15,4 @@ interface LoginInterface {
     @POST("logout")
     fun logout(@Header("Authorization") authToken: String): Call<LogoutResponse>
 
-    fun usertype(userType: String)
 }

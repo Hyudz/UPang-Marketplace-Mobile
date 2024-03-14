@@ -1,7 +1,9 @@
 package com.example.phinma_upang_marketplace
 
 import HistoryResponse
+import ProductDetail
 import ProductsFetch
+import SellerResponse
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -68,8 +70,8 @@ class PurchaseHistory : AppCompatActivity() {
         val retrofitData = retrofit.create(ItemsInterface::class.java)
         val service = retrofitData.getSellerHistory(authToken)
         val adapter = HistoryAdapter2(this@PurchaseHistory, R.layout.item_history, mutableListOf(), authToken, usertype)
-        service.enqueue(object : Callback<List<ProductsFetch>> {
-            override fun onResponse(call: Call<List<ProductsFetch>>, response: Response<List<ProductsFetch>>) {
+        service.enqueue(object : Callback<List<SellerResponse>> {
+            override fun onResponse(call: Call<List<SellerResponse>>, response: Response<List<SellerResponse>>) {
                 if (response.isSuccessful) {
                     adapter.clearData()
                     adapter.addAll(response.body()!!)
@@ -80,8 +82,14 @@ class PurchaseHistory : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<ProductsFetch>>, t: Throwable) {
-                Toast.makeText(applicationContext, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: Call<List<SellerResponse>>, t: Throwable) {
+                Toast.makeText(applicationContext, "Failed to fetch Items", Toast.LENGTH_SHORT).show()
+                Log.d("PurchaseHistory", "Error: ${t.message}")
+                Log.d("PurchaseHistory", "Error: ${call.request().body()}")
+                Log.d("PurchaseHistory", "Error: ${call.request().headers()}")
+                Log.d("PurchaseHistory", "Error: ${call.request().url()}")
+                Log.d("PurchaseHistory", "Error: ${call.request().method()}")
+
             }
         })
 

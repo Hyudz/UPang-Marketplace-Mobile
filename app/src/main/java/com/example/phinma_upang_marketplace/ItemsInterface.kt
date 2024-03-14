@@ -2,15 +2,19 @@ package com.example.phinma_upang_marketplace
 
 import GetData
 import HistoryResponse
+import MessageResponse
 import OrderHistory
 import OrderRequest
 import OrderResponse
 import PostProduct
+import ProductDetail
 import ProductHistory
 import ProductsRequest
 import ProductsFetch
 import ProfileRequest
 import RemoveRequest
+import SellerResponse
+import UpdateRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -64,7 +68,7 @@ interface ItemsInterface {
     fun getHistory(@Header("Authorization") token: String): Call<List<HistoryResponse>>
 
     @GET("sellerProfile")
-    fun getSellerHistory(@Header("Authorization") token: String): Call<List<ProductsFetch>>
+    fun getSellerHistory(@Header("Authorization") token: String): Call<List<SellerResponse>>
 
     @POST("cancelOrder")
     fun cancelOrder(@Body orderId: OrderHistory, @Header("Authorization") token: String): Call<OrderResponse>
@@ -77,4 +81,7 @@ interface ItemsInterface {
 
     @PUT("updateProduct/{id}")
     fun updateProduct(@Body productRequest: PostProduct, @Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
+
+    @PUT("updateAccount/{id}")
+    fun updateAccount(@Body updateRequest: UpdateRequest, @Header("Authorization") token: String, @Path("id") id: String): Call<OrderResponse>
 }

@@ -99,6 +99,33 @@ class ConfirmOrder : AppCompatActivity() {
 
         val service = retrofit.create(ItemsInterface::class.java)
         val serviceCall = service.getBuyer(authToken)
+        serviceCall.enqueue(object : Callback<GetData> {
+            override fun onResponse(call: Call<GetData>, response: Response<GetData>) {
+                if (response.isSuccessful) {
+                    val firstName = response.body()?.first_name
+                    val lastName = response.body()?.last_name
+                    val email = response.body()?.email
+                    val buyerDetails = "$firstName $lastName \n$email"
+                    val buyerName = findViewById<TextView>(R.id.buyerName)
+                    buyerName.text = buyerDetails
+                    Log.d("ConfirmOrder", "Buyer Details: $buyerDetails")
+
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("ConfirmOrder", "Error Response Body: $errorBody")
+                    Toast.makeText(this@ConfirmOrder, "Failed to Fetch Buyer Data", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<GetData>, t: Throwable) {
+                Log.e("ConfirmOrder", "Failed to connect", t)
+                Toast.makeText(this@ConfirmOrder, "Something went wrong", Toast.LENGTH_SHORT).show()
+
+                if (t is HttpException) {
+                    Log.e("ConfirmOrder", "Raw Response: ${t.response()?.errorBody()?.string()}")
+                }
+            }
+        })
     }
 
     fun placeOrder(productName: String, productPrice: String, productID: String, authToken: String, sellerId: String){

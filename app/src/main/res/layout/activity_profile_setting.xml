@@ -10,7 +10,7 @@
         android:id="@+id/profile_setting_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update your Profile"
+        android:text="@string/update_your_profile"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -35,80 +35,76 @@
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="Last Name"
+        android:hint="@string/last_namee"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_setting_fname" />
 
-    <EditText
-        android:id="@+id/profile_setting_email"
-        android:layout_width="310dp"
+    <Spinner
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/gender_spinner"
         android:layout_marginTop="10dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_setting_lname"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_setting_lname"/>
 
     <EditText
-        android:id="@+id/currentPassword"
+        android:id="@+id/birthdate"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:hint="Current Password"
-        android:inputType="textPassword"
+        android:hint="@string/birthdate"
         android:layout_marginTop="10dp"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_setting_email"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/gender_spinner" />
 
     <EditText
-        android:id="@+id/newPassword"
+        android:id="@+id/address"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:hint="New Password"
-        android:inputType="textPassword"
+        android:hint="@string/address"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/birthdate" />
 
     <EditText
+        android:id="@+id/contact"
         android:layout_width="310dp"
-        android:id="@+id/confirmPassword"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
+        android:hint="@string/contact_no"
         android:layout_marginTop="10dp"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/address" />
+
 
     <Button
         android:id="@+id/profile_setting_update"
         android:layout_width="310dp"
         android:layout_height="50dp"
-        android:text="Update"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/green"
+        android:text="@string/update"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/contact"
+        app:layout_constraintVertical_bias="0.27" />
 
     <Button
         android:id="@+id/profile_setting_delete"
         android:layout_width="310dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:text="Delete Account"
+        android:text="@string/delete_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_setting_update"
-        app:layout_constraintVertical_bias="0.924" />
+        app:layout_constraintTop_toBottomOf="@+id/contact"
+        app:layout_constraintVertical_bias="0.572" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

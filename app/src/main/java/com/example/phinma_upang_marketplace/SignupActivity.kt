@@ -1,16 +1,13 @@
 package com.example.phinma_upang_marketplace
 
 import SignUpRequest
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.GrammaticalInflectionManagerCompat.GrammaticalGender
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +24,8 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var firstName : EditText
     private lateinit var lastName : EditText
     private lateinit var passwordConfirm : EditText
+    private lateinit var address : EditText
+    private lateinit var contactNo : EditText
 
     private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +42,8 @@ class SignupActivity : AppCompatActivity() {
         lastName = findViewById(R.id.lastname)
         password = findViewById(R.id.Password_Signup)
         passwordConfirm = findViewById(R.id.password_confirm)
+        address = findViewById(R.id.address)
+        contactNo = findViewById(R.id.contact)
 
         // Kotlin code for the spinner
         val adapter = ArrayAdapter.createFromResource(this, R.array.usertype, android.R.layout.simple_spinner_item)
@@ -76,10 +77,11 @@ class SignupActivity : AppCompatActivity() {
             usertypeSpinner.selectedItem.toString(),
             genderSpinner.selectedItem.toString(),
             "2022-12-12",
-            )
+            address.text.toString(),
+            contactNo.text.toString())
 
-        service.signup(request).enqueue(object : Callback<SignUpRequest> {
-            override fun onResponse(call: Call<SignUpRequest>, response: Response<SignUpRequest>) {
+        service.signup(request).enqueue(object : Callback<TokenResponse> {
+            override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
@@ -92,7 +94,7 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<SignUpRequest>, t: Throwable) {
+            override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
                 Toast.makeText(applicationContext, "Network error. Please try again.", Toast.LENGTH_SHORT).show()
             }
         })

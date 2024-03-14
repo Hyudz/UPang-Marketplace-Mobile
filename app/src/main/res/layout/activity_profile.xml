@@ -47,6 +47,17 @@
         android:text="Edit Profile"
         android:layout_marginBottom="5dp"
         android:backgroundTint="@color/green"
+        app:layout_constraintBottom_toTopOf="@+id/updateAccountButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/updateAccountButton"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:text="Update Account"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/green"
         app:layout_constraintBottom_toTopOf="@+id/purchaseHistoryButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

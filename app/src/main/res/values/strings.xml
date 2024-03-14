@@ -69,4 +69,11 @@
     <string name="message_optional">Message (optional)</string>
     <string name="edit_fName">First Name</string>
     <string name="update">Update</string>
+    <string name="contact_no">Contact Number</string>
+    <string name="update_your_profile">Update your Profile</string>
+    <string name="last_namee">Last Name</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="address">Address</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="update_your_account">Update Your Account</string>
 </resources>

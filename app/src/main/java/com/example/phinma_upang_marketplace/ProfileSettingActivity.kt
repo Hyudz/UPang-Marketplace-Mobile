@@ -7,8 +7,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,9 +25,14 @@ class ProfileSettingActivity : AppCompatActivity() {
         val updateProfile : Button = findViewById(R.id.profile_setting_update)
         val deleteProfile : Button = findViewById(R.id.profile_setting_delete)
         val authToken = intent.getStringExtra("authToken")
+
+        val newGender : Spinner = findViewById(R.id.gender_spinner)
+        val adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        newGender.adapter = adapter
         getId(authToken!!)
         updateProfile.setOnClickListener {
-            updateProfile(authToken!!, userId.toInt())
+            updateProfile(authToken!!, userId.toInt(), newGender.selectedItem.toString())
         }
 
         deleteProfile.setOnClickListener {
@@ -33,20 +40,19 @@ class ProfileSettingActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateProfile(authToken : String, id : Int) {
+    private fun updateProfile(authToken : String, id : Int, newGender : String) {
         val newFname : EditText = findViewById(R.id.profile_setting_fname)
         val newLname : EditText = findViewById(R.id.profile_setting_lname)
-        val newEmail : EditText = findViewById(R.id.profile_setting_email)
-        val currentPassword : EditText = findViewById(R.id.currentPassword)
-        val newPassword : EditText = findViewById(R.id.newPassword)
-        val confirmNewPassword : EditText = findViewById(R.id.confirmPassword)
+        val newBDate : EditText = findViewById(R.id.birthdate)
+        val newContact : EditText = findViewById(R.id.contact)
+        val newAddress : EditText = findViewById(R.id.address)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(ItemsInterface::class.java)
-        val request = ProfileRequest(newFname.toString(), newLname.toString(), newEmail.toString(), currentPassword.toString(), newPassword.toString(), confirmNewPassword.toString())
+        val request = ProfileRequest(newFname.text.toString(), newLname.text.toString(), newGender ,newBDate.toString(),newContact.toString(), newAddress.toString())
         val call = service.updateProfile(request, authToken, id)
         call.enqueue(object : retrofit2.Callback<OrderResponse> {
             override fun onResponse(call: retrofit2.Call<OrderResponse>, response: retrofit2.Response<OrderResponse>) {

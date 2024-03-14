@@ -39,6 +39,13 @@ class ProfileActivity : AppCompatActivity() {
             editProfile(authToken!!)
         }
 
+        val updateAccount : Button = findViewById(R.id.updateAccountButton)
+        updateAccount.setOnClickListener {
+            val intent = Intent(this, update_account::class.java)
+            intent.putExtra("authToken", authToken)
+            startActivity(intent)
+        }
+
 //        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
 //        dashboardBtn.setOnClickListener {
 //            sellerDashboard()
