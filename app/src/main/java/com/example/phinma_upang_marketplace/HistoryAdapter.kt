@@ -110,6 +110,7 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<SellerRespon
 
         Log.d("HistoryAdapter2", "Current Item: $currentItem")
 
+<<<<<<< HEAD
 //        if (currentItem?.availability == "to ship") {
 //                controllerBtn.text = "Settle"
 //                editBtn.visibility = View.GONE
@@ -143,6 +144,33 @@ class HistoryAdapter2 (context: Context, resource: Int, items: List<SellerRespon
 //        itemNameTextView.text = currentItem?.name
 //        priceTextView.text = currentItem?.price.toString()
 //        statusTextView.text = currentItem?.availability
+=======
+        controllerBtn.setOnClickListener{
+            if (usertype == "seller"){
+                setlleOrder(currentItem?.id!!)
+                Log.d("HistoryAdapter2", "${currentItem?.id}")
+            }
+        }
+
+        editBtn.setOnClickListener{
+<<<<<<< Updated upstream
+            val intent = android.content.Intent(context, updateProduct::class.java)
+            intent.putExtra("id", currentItem?.id.toString())
+            intent.putExtra("authToken", authToken)
+            context.startActivity(intent)
+=======
+            Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show()
+>>>>>>> Stashed changes
+        }
+
+        deleteBtn.setOnClickListener{
+            deleteProduct(currentItem?.id!!, authToken)
+        }
+
+        itemNameTextView.text = currentItem?.name
+        priceTextView.text = currentItem?.price.toString()
+        statusTextView.text = currentItem?.availability
+>>>>>>> dbb5c4e99703b83ad05a13923564aed1e12901b1
 
         return itemView
     }

@@ -86,8 +86,15 @@
         android:id="@+id/profile_setting_update"
         android:layout_width="310dp"
         android:layout_height="50dp"
+<<<<<<< HEAD
         android:text="@string/update"
         app:layout_constraintBottom_toBottomOf="parent"
+=======
+        android:text="Update"
+        android:textColor="@color/yellow"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/green"
+>>>>>>> dbb5c4e99703b83ad05a13923564aed1e12901b1
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +105,14 @@
         android:id="@+id/profile_setting_delete"
         android:layout_width="310dp"
         android:layout_height="50dp"
+<<<<<<< HEAD
         android:text="@string/delete_account"
+=======
+        android:layout_marginTop="10dp"
+        android:text="Delete Account"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/Red"
+>>>>>>> dbb5c4e99703b83ad05a13923564aed1e12901b1
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"

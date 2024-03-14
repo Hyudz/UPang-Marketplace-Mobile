@@ -75,6 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end">
 
+<<<<<<< Updated upstream
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,11 +90,34 @@
                     android:layout_gravity="end"
                     android:text="Delete" />
 
+=======
+>>>>>>> Stashed changes
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+<<<<<<< Updated upstream
                     android:id="@+id/controll"/>
+=======
+                    android:text="Edit"
+                    android:id="@+id/Edit"
+                    android:backgroundTint="@color/green"/>
+
+                <Button
+                    android:id="@+id/Delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Delete"
+                    android:backgroundTint="@color/green"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:id="@+id/controll"
+                    android:backgroundTint="@color/green"/>
+>>>>>>> Stashed changes
 
                 </LinearLayout>
             </LinearLayout>

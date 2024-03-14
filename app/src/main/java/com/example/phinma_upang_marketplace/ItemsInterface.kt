@@ -78,10 +78,16 @@ interface ItemsInterface {
 
     @DELETE("deleteProduct/{id}")
     fun deleteProduct(@Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
+<<<<<<< Updated upstream
 
     @PUT("updateProduct/{id}")
     fun updateProduct(@Body productRequest: PostProduct, @Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
+<<<<<<< HEAD
 
     @PUT("updateAccount/{id}")
     fun updateAccount(@Body updateRequest: UpdateRequest, @Header("Authorization") token: String, @Path("id") id: String): Call<OrderResponse>
+=======
+=======
+>>>>>>> Stashed changes
+>>>>>>> dbb5c4e99703b83ad05a13923564aed1e12901b1
 }
