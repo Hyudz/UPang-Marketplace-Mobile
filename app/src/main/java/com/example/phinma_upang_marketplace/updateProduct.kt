@@ -1,6 +1,5 @@
 package com.example.phinma_upang_marketplace
 
-<<<<<<< Updated upstream
 import OrderResponse
 import PostProduct
 import android.content.Intent
@@ -17,22 +16,13 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class updateProduct : AppCompatActivity() {
-    val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
-=======
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 
 class updateProduct : AppCompatActivity() {
-    var courses = arrayOf<String?>("C", "Data structures",
-        "Interview prep", "Algorithms",
-        "DSA with java", "OS")
->>>>>>> Stashed changes
+    val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_product)
 
-<<<<<<< Updated upstream
         val newName = findViewById<EditText>(R.id.productName)
         val newPrice = findViewById<EditText>(R.id.productPrice)
         val newDescription = findViewById<EditText>(R.id.productDescription)
@@ -75,7 +65,5 @@ class updateProduct : AppCompatActivity() {
             })
         }
 
-=======
->>>>>>> Stashed changes
     }
 }

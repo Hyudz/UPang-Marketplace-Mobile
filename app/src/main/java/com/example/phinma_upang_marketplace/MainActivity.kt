@@ -67,6 +67,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     Toast.makeText(applicationContext, "Login Failed", Toast.LENGTH_SHORT).show()
+                    Log.d("Login", "Unsuccessful response: ${response.code()}")
+                    Log.d("Login", "Request URL: ${call.request().url()}")
+                    Log.d("Login", "Request Method: ${call.request().method()}")
+                    Log.d("Login", "Request Headers: ${call.request().headers()}")
+                    Log.d("Login", "Request Body: ${call.request()}")
+                    Log.d("Login", "Request Body: ${call.request().body()}")
                 }
             }
 

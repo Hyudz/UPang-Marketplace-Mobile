@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProfileActivity : AppCompatActivity() {
     private lateinit var logoutBtn : Button
     val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
+    private lateinit var usertype : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -27,12 +28,15 @@ class ProfileActivity : AppCompatActivity() {
         val lname = intent.getStringExtra("lname")
         val fullName = "$fname $lname"
         val authToken = intent.getStringExtra("authToken")
+        val usertype = intent.getStringExtra("usertype")
         profileName.text = fullName
 
         logoutBtn = findViewById(R.id.logoutButton)
         logoutBtn.setOnClickListener {
             logout()
         }
+
+
 
         val editProfile : Button = findViewById(R.id.editProfileButton)
         editProfile.setOnClickListener {
@@ -46,14 +50,19 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
-//        dashboardBtn.setOnClickListener {
-//            sellerDashboard()
-//        }
+        val dashboardBtn : Button = findViewById(R.id.sellerDashboardButton)
+
+        if (usertype == "buyer") {
+            dashboardBtn.visibility = Button.GONE
+        }
+
+        dashboardBtn.setOnClickListener {
+            sellerDashboard(authToken!!)
+        }
 
         val purchaseHistoryBtn : Button = findViewById(R.id.purchaseHistoryButton)
         purchaseHistoryBtn.setOnClickListener {
-            getUser(authToken!!)
+            purchaseHistory(authToken!!, usertype!!)
         }
     }
 
@@ -63,8 +72,9 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun sellerDashboard() {
+    fun sellerDashboard(authToken: String) {
         val intent = Intent(this, Dashboard::class.java)
+        intent.putExtra("authToken", authToken)
         startActivity(intent)
     }
 
@@ -108,31 +118,7 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    fun getUser(authToken : String){
-        var usertype : String
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val retrofitData = retrofit.create(ItemsInterface::class.java)
-        val service = retrofitData.getBuyer(authToken)
-        service.enqueue(object : retrofit2.Callback<GetData> {
-            override fun onResponse(call: retrofit2.Call<GetData>, response: retrofit2.Response<GetData>) {
-                if (response.isSuccessful) {
-                    usertype = response.body()!!.user_type
-                    purchaseHistory(authToken, usertype)
-                    Log.d("ProfileSettingActivity", "User Type: $usertype")
-                } else {
-                    //Toast.makeText(this, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: retrofit2.Call<GetData>, t: Throwable) {
-                //Toast.makeText(this, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
 
 
 

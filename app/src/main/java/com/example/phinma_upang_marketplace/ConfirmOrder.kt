@@ -10,8 +10,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
@@ -33,6 +35,10 @@ class ConfirmOrder : AppCompatActivity() {
         val productID = intent.getStringExtra("product_id").toString()
         val sellerId = intent.getStringExtra("seller_id").toString()
         val authToken = intent.getStringExtra("authToken").toString()
+        val productPath = intent.getStringExtra("product_image").toString()
+        val productImage : ImageView = findViewById(R.id.productImage)
+
+        Glide.with(this).load(productPath).into(productImage)
         buyerName = findViewById(R.id.buyerName)
         val textView = findViewById<TextView>(R.id.textView2)
 

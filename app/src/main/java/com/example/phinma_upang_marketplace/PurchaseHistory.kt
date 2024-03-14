@@ -1,9 +1,8 @@
 package com.example.phinma_upang_marketplace
 
 import HistoryResponse
+import Product
 import ProductDetail
-import ProductsFetch
-import SellerResponse
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PurchaseHistory : AppCompatActivity() {
     private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
-    //private val BASE_URL = "https://upmarketplace-com.preview-domain.com/public/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_purchase_history)
@@ -70,8 +68,8 @@ class PurchaseHistory : AppCompatActivity() {
         val retrofitData = retrofit.create(ItemsInterface::class.java)
         val service = retrofitData.getSellerHistory(authToken)
         val adapter = HistoryAdapter2(this@PurchaseHistory, R.layout.item_history, mutableListOf(), authToken, usertype)
-        service.enqueue(object : Callback<List<SellerResponse>> {
-            override fun onResponse(call: Call<List<SellerResponse>>, response: Response<List<SellerResponse>>) {
+        service.enqueue(object : Callback<List<ProductDetail>> {
+            override fun onResponse(call: Call<List<ProductDetail>>, response: Response<List<ProductDetail>>) {
                 if (response.isSuccessful) {
                     adapter.clearData()
                     adapter.addAll(response.body()!!)
@@ -82,19 +80,17 @@ class PurchaseHistory : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<SellerResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ProductDetail>>, t: Throwable) {
                 Toast.makeText(applicationContext, "Failed to fetch Items", Toast.LENGTH_SHORT).show()
                 Log.d("PurchaseHistory", "Error: ${t.message}")
                 Log.d("PurchaseHistory", "Error: ${call.request().body()}")
                 Log.d("PurchaseHistory", "Error: ${call.request().headers()}")
                 Log.d("PurchaseHistory", "Error: ${call.request().url()}")
                 Log.d("PurchaseHistory", "Error: ${call.request().method()}")
-
             }
         })
 
         val listView: ListView = findViewById(R.id.purchase_history)
         listView.adapter = adapter
-
     }
 }

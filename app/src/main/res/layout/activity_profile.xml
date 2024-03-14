@@ -30,15 +30,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
-<!--    <Button-->
-<!--        android:id="@+id/sellerDashboardButton"-->
-<!--        android:layout_width="310dp"-->
-<!--        android:layout_height="35dp"-->
-<!--        android:text="Dashboard"-->
-<!--        android:layout_marginBottom="5dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/purchaseHistoryButton"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <Button
+        android:id="@+id/sellerDashboardButton"
+        android:layout_width="310dp"
+        android:layout_height="35dp"
+        android:text="Dashboard"
+        app:layout_constraintBottom_toTopOf="@+id/editProfileButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <Button
         android:id="@+id/editProfileButton"
@@ -78,11 +78,12 @@
         android:layout_width="310dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="288dp"
-        android:text="Logout"
+        android:layout_marginBottom="256dp"
         android:backgroundTint="@color/green"
+        android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

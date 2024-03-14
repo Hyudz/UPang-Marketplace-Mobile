@@ -1,5 +1,6 @@
 package com.example.phinma_upang_marketplace
 
+import GetData
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -12,20 +13,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomePageActivity : AppCompatActivity() {
     private lateinit var shop: Button
+    private lateinit var usertype: String
+    private lateinit var fname: String
+    private lateinit var lname: String
+    private val BASE_URL = "https://marketplacebackup-036910b2ff5f.herokuapp.com/api/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
         shop = findViewById(R.id.startshopping)
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavigationview)
         bottomNavigationView.selectedItemId = R.id.home
-        val fname : String = intent.getStringExtra("fname").toString()
-        val lname : String = intent.getStringExtra("lname").toString()
-
 
         val authToken = intent.getStringExtra("authToken")
+        getUser(authToken!!)
         shop.setOnClickListener {
             val intent = Intent(this, ProductItem::class.java)
             intent.putExtra("authToken", authToken)
@@ -33,12 +38,6 @@ class HomePageActivity : AppCompatActivity() {
             intent.putExtra("lname", lname)
             startActivity(intent)
         }
-
-//        messagesButton.setOnClickListener {
-//            val intent = Intent(this, Messages::class.java)
-//            intent.putExtra("authToken", authToken)
-//            startActivity(intent)
-//        }
 
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -67,12 +66,41 @@ class HomePageActivity : AppCompatActivity() {
                     Log.d("HomePageActivity", "Auth Token: $authToken")
                     intent.putExtra("fname", fname)
                     intent.putExtra("lname", lname)
+                    intent.putExtra("usertype", usertype)
                     startActivity(intent)
                 }
             }
             true
         }
     }
+
+    fun getUser(authToken : String){
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retrofitData = retrofit.create(ItemsInterface::class.java)
+        val service = retrofitData.getBuyer(authToken)
+        service.enqueue(object : retrofit2.Callback<GetData> {
+            override fun onResponse(call: retrofit2.Call<GetData>, response: retrofit2.Response<GetData>) {
+                if (response.isSuccessful) {
+                    usertype = response.body()!!.user_type
+                    fname = response.body()!!.first_name
+                    lname = response.body()!!.last_name
+                    Log.d("ProfileSettingActivity", "User Type: $usertype")
+                } else {
+                    Toast.makeText( this@HomePageActivity, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<GetData>, t: Throwable) {
+                Toast.makeText(this@HomePageActivity, "Failed to fetch Liked Items", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 
     //dinagdag ko lang to para hindi mag back sa log in page
     @SuppressLint("MissingSuperCall")

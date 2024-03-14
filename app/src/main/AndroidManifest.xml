@@ -18,7 +18,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".EditProduct"
+            android:exported="false" />
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".update_account"
+            android:exported="false" />
+        <activity
+            android:name=".ProductItem"
             android:exported="false" />
         <activity
             android:name=".updateProduct"
@@ -26,12 +35,9 @@
         <activity
             android:name=".PurchaseHistory"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity"/>
+            android:parentActivityName=".ProfileActivity" />
         <activity
             android:name=".Dashboard"
-            android:exported="false" />
-        <activity
-            android:name=".Messages"
             android:exported="false" />
         <activity
             android:name=".ProfileSettingActivity"
@@ -39,47 +45,25 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="false"
-            android:parentActivityName=".HomePageActivity"/>
+            android:parentActivityName=".HomePageActivity" />
         <activity
             android:name=".CartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Likes"
             android:exported="false" />
         <activity
             android:name=".Notifications"
             android:exported="false"
             android:label="@string/title_activity_notifications"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace"
-            android:parentActivityName=".HomePageActivity"/>
+            android:parentActivityName=".HomePageActivity"
+            android:theme="@style/Theme.PHINMAUPangMarketPlace" />
         <activity
             android:name=".OrderConfirmed"
             android:exported="false" />
         <activity
             android:name=".ConfirmOrder"
             android:exported="false"
-            android:parentActivityName=".ViewProducts"/>
+            android:parentActivityName=".ViewProducts" />
         <activity
             android:name=".ViewProducts"
-            android:exported="false" />
-        <activity
-<<<<<<< Updated upstream
-=======
-            android:name=".ViewProduct"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_view_product"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace.Fullscreen"
-            android:parentActivityName=".ProductItem"/>
-        <activity
->>>>>>> Stashed changes
-            android:name=".ProductItem"
-            android:exported="false"
-            android:label="@string/title_activity_product_item"
-            android:theme="@style/Theme.PHINMAUPangMarketPlace"
-            android:parentActivityName=".HomePageActivity"/>
-        <activity
-            android:name=".SignupActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

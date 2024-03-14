@@ -38,14 +38,14 @@ class update_account : AppCompatActivity() {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val service = retrofit.create(ItemsInterface::class.java)
-        val request = UpdateRequest(email.toString(), newPassword.toString(), confirmPassword.toString())
+        val request = UpdateRequest(email.text.toString(), newPassword.text.toString(), confirmPassword.text.toString())
         val call = service.updateAccount(request, authToken, userId)
-        call.enqueue(object : retrofit2.Callback<OrderResponse> {
-            override fun onResponse(call: retrofit2.Call<OrderResponse>, response: retrofit2.Response<OrderResponse>) {
+        call.enqueue(object : retrofit2.Callback<Void> {
+            override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
                 if (response.isSuccessful) {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     finish()
@@ -61,19 +61,12 @@ class update_account : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<OrderResponse>, t: Throwable) {
-                Log.d("Profile Setting", t.message.toString())
-                Log.d("Profile Setting", t.cause.toString())
-                Log.d("Profile Setting", t.stackTrace.toString())
-                Log.d("Profile Setting", t.localizedMessage.toString())
-                Log.d("Profile Setting", t.toString())
-                Log.d("Profile Setting", t.fillInStackTrace().toString())
-                Log.d("Profile Setting", t.suppressed.toString())
-                Log.d("Profile Setting", call.request().body().toString())
-                Log.d("Profile Setting", call.request().headers().toString())
-                Log.d("Profile Setting", call.request().url().toString())
-                Log.d("Profile Setting", call.request().method().toString())
-                Log.d("Profile Setting", call.request().isHttps.toString())
+            override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
+                Log.d("Profile Setting", t.stackTraceToString())
+
+                Log.d("Email", email.text.toString())
+                Log.d("Password", newPassword.text.toString())
+                Log.d("Confirm Password", confirmPassword.text.toString())
                 Toast.makeText(applicationContext, "Error. Please check your internet connection", Toast.LENGTH_SHORT).show()
             }
         })

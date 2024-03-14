@@ -71,11 +71,7 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-<<<<<<< Updated upstream
         android:text="@string/update"
-=======
-        android:text="Update"
->>>>>>> Stashed changes
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category" />

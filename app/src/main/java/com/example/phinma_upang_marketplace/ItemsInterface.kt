@@ -2,18 +2,17 @@ package com.example.phinma_upang_marketplace
 
 import GetData
 import HistoryResponse
-import MessageResponse
 import OrderHistory
 import OrderRequest
 import OrderResponse
 import PostProduct
+import Product
 import ProductDetail
 import ProductHistory
 import ProductsRequest
 import ProductsFetch
 import ProfileRequest
 import RemoveRequest
-import SellerResponse
 import UpdateRequest
 import retrofit2.Call
 import retrofit2.http.Body
@@ -68,7 +67,10 @@ interface ItemsInterface {
     fun getHistory(@Header("Authorization") token: String): Call<List<HistoryResponse>>
 
     @GET("sellerProfile")
-    fun getSellerHistory(@Header("Authorization") token: String): Call<List<SellerResponse>>
+    fun getSellerHistory(@Header("Authorization") token: String): Call<List<ProductDetail>>
+
+    @GET("sellerProducts")
+    fun getSellerProducts(@Header("Authorization") token: String): Call<List<Product>>
 
     @POST("cancelOrder")
     fun cancelOrder(@Body orderId: OrderHistory, @Header("Authorization") token: String): Call<OrderResponse>
@@ -78,16 +80,10 @@ interface ItemsInterface {
 
     @DELETE("deleteProduct/{id}")
     fun deleteProduct(@Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
-<<<<<<< Updated upstream
 
     @PUT("updateProduct/{id}")
     fun updateProduct(@Body productRequest: PostProduct, @Header("Authorization") token: String, @Path("id") id: Int): Call<OrderResponse>
-<<<<<<< HEAD
 
     @PUT("updateAccount/{id}")
-    fun updateAccount(@Body updateRequest: UpdateRequest, @Header("Authorization") token: String, @Path("id") id: String): Call<OrderResponse>
-=======
-=======
->>>>>>> Stashed changes
->>>>>>> dbb5c4e99703b83ad05a13923564aed1e12901b1
+    fun updateAccount(@Body updateRequest: UpdateRequest, @Header("Authorization") token: String, @Path("id") id: String): Call<Void>
 }
